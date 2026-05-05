@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, E
 # =========================
 # 1. Cargar datos
 # =========================
-df = pd.read_csv("data.csv")
+df = pd.read_csv("data/data.csv")
 
 print("📊 Dataset cargado:")
 print(df.head())
@@ -228,7 +228,7 @@ plt.xlabel("Modelo")
 plt.ylabel("Error")
 plt.xticks(rotation=20)
 plt.tight_layout()
-plt.savefig("comparacion_errores.png")
+plt.savefig("outputs/comparacion_errores.png")
 plt.show()
 
 # -------------------------
@@ -242,7 +242,7 @@ plt.ylabel("R²")
 plt.xticks(rotation=20)
 plt.ylim(0, 1)  # para que se vea bien la escala
 plt.tight_layout()
-plt.savefig("comparacion_r2.png")
+plt.savefig("outputs/comparacion_r2.png")
 plt.show()
 
 # -------------------------
@@ -269,7 +269,7 @@ plt.bar(["Entrenamiento", "Prueba"], [r2_train, r2_test])
 plt.title("R² Entrenamiento vs Prueba")
 plt.ylabel("R²")
 plt.tight_layout()
-plt.savefig("entrenamiento_vs_prueba.png")
+plt.savefig("outputs/entrenamiento_vs_prueba.png")
 plt.show()
 
 # -------------------------
@@ -287,7 +287,7 @@ if hasattr(best_model, "feature_importances_"):
     plt.title("Top 10 variables más importantes")
     plt.xlabel("Importancia")
     plt.tight_layout()
-    plt.savefig("importancia_variables.png")
+    plt.savefig("outputs/importancia_variables.png")
     plt.show()
 
 # -------------------------
@@ -305,14 +305,15 @@ plt.title("Predicción vs Valores Reales")
 plt.xlabel("Precio real")
 plt.ylabel("Precio predicho")
 plt.tight_layout()
-plt.savefig("prediccion_vs_real.png")
+plt.savefig("outputs/prediccion_vs_real.png")
 plt.show()
 
 print("\n✅ Gráficas guardadas:")
-print("- comparacion_modelos.png")
-print("- entrenamiento_vs_prueba.png")
-print("- importancia_variables.png")
-print("- prediccion_vs_real.png")
+print("- outputs/comparacion_errores.png")
+print("- outputs/comparacion_r2.png")
+print("- outputs/entrenamiento_vs_prueba.png")
+print("- outputs/importancia_variables.png")
+print("- outputs/prediccion_vs_real.png")
 
 # -------------------------
 # Gráfica de residuos
@@ -328,7 +329,7 @@ plt.title("Residuos vs Predicción")
 plt.xlabel("Predicción")
 plt.ylabel("Residuo (Error)")
 plt.tight_layout()
-plt.savefig("residuos.png")
+plt.savefig("outputs/residuos.png")
 plt.show()
 
 plt.figure(figsize=(7, 5))
@@ -337,22 +338,22 @@ plt.title("Distribución de residuos")
 plt.xlabel("Error")
 plt.ylabel("Frecuencia")
 plt.tight_layout()
-plt.savefig("distribucion_residuos.png")
+plt.savefig("outputs/distribucion_residuos.png")
 plt.show()
 
 # =========================
 # 14. Guardar archivos
 # =========================
-joblib.dump(best_model, "model.pkl")
-joblib.dump(X.columns.tolist(), "columns.pkl")
-joblib.dump(True, "uses_log_target.pkl")
+joblib.dump(best_model, "models/model.pkl")
+joblib.dump(X.columns.tolist(), "models/columns.pkl")
+joblib.dump(True, "models/uses_log_target.pkl")
 
 # Guardar ejemplos reales para validar después
 test_examples = X_test.copy()
 test_examples["real_price"] = np.expm1(y_test)
 
-test_examples.to_csv("test_examples.csv", index=False)
+test_examples.to_csv("validation/test_examples.csv", index=False)
 
-print("✅ Ejemplos de prueba guardados en test_examples.csv")
+print("✅ Ejemplos de prueba guardados en validation/test_examples.csv")
 
 print("\n✅ Modelo, columnas y configuración guardados correctamente")

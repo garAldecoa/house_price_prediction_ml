@@ -2,9 +2,8 @@ import pandas as pd
 import numpy as np
 import joblib
 
-model = joblib.load("model.pkl")
-
-df = pd.read_csv("test_examples.csv")
+model = joblib.load("models/model.pkl")
+df = pd.read_csv("validation/test_examples.csv")
 
 X = df.drop("real_price", axis=1)
 y_real = df["real_price"]

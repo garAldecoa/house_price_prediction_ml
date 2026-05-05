@@ -6,8 +6,8 @@ import joblib
 # =========================
 # Cargar modelo y columnas
 # =========================
-model = joblib.load("model.pkl")
-columns = joblib.load("columns.pkl")
+model = joblib.load("models/model.pkl")
+columns = joblib.load("models/columns.pkl")
 
 st.set_page_config(
     page_title="Predicción de Precio de Casas",

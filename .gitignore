@@ -1,6 +1,8 @@
 __pycache__/
 *.pyc
-*.pkl
-*.csv
+.venv/
 .env
-.venv
+
+models/*.pkl
+data/*.csv
+validation/*.csv
